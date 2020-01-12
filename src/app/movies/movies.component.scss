@@ -1,0 +1,45 @@
+
+/*
+declare var. $varname:value
+nesting
+@extend
+
+
+*/
+
+@import '../colors';
+
+$direction:rtl;
+$floatLeft:left;
+$floatRight:right;
+
+
+@if $direction==ltr
+{
+    $floatLeft:left;
+$floatRight:right;
+}
+@else{
+    $floatLeft:right;
+    $floatRight:left;
+}
+
+@mixin boxShadow($x,$y,$b,$c) {
+    -webkit-box-shadow:$x $y $b $c;
+    -moz-box-shadow:$x $y $b $c;
+    -o-box-shadow:$x $y $b $c;
+    -ms-box-shadow:$x $y $b $c;
+    box-shadow:$x $y $b $c;
+}
+
+.movie-card{
+    @include boxShadow(0, 0, 10px, #03A9F4 )
+}
+.aver{
+    position: absolute;
+    top:0;
+    right:30px;
+    background-color: #09c;
+    padding:15px;
+    color:#fff
+}

@@ -1,0 +1,169 @@
+<!-- <div class="container">
+    <div class="row">
+      <div *ngFor="let m of movies" class="col-md-4">
+        <div class="user">
+            <img class="img-fluid" src="https://image.tmdb.org/t/p/original{{m.poster_path}}">
+            <h2>{{m.title}}</h2>
+            <p>{{m.overview}}</p>
+        </div>
+      </div>
+    </div>
+</div> -->
+
+<!-- <div class="test">web design and development</div> -->
+
+
+<!-- <div class="parent">
+    
+    <div class="child1">web</div>
+    <div class="child2">web</div>
+    <div class="child3">web</div>
+    <div class="child4">web</div>
+    <div class="child5">web</div>
+
+</div> -->
+
+
+<div class="text-white container py-5">
+        <!-- <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>age</th>
+                        <th>salary</th>
+                        <th>date of birth</th>
+                        <th>gender</th>
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let u of users">
+                        <td>{{u.name|gender:u.gender}}</td>
+                        <td>{{u.age}}</td>
+                        <td>{{u.salary|currency:'EUR'}}</td>
+                        <td>{{u.dateOfBirth|date}}</td>
+                        <td>{{u.gender}}</td>
+                    </tr>
+                   
+                </tbody>
+            </table> 
+    -->
+    
+    <h1 class="text-center">Crud operations</h1>
+  
+  
+    <form  [formGroup]="userData" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label> user Name</label>
+        <input formControlName="userName" type="text" class="form-control">
+        <div *ngIf="userData.controls.userName.touched&&userData.controls.userName.errors!=null" class="alert alert-danger mt-3">user name min length 5</div>
+
+      </div>
+      <div class="form-group">
+            <label> user Age</label>
+            <input formControlName="userAge" type="text" class="form-control">
+            <div *ngIf="userData.controls.userAge.touched&&userData.controls.userAge.errors!=null" class="alert alert-danger mt-3">user age from 15 to 60</div>
+
+          </div>
+          <div class="form-group">
+                <label> user Mail</label>
+                <input formControlName="userMail" type="email" class="form-control">
+                <div *ngIf="userData.controls.userMail.touched&&userData.controls.userMail.errors!=null" class="alert alert-danger mt-3">user mail should be valid </div>
+
+            </div>
+            <div class="form-group">
+                    <label> user password</label>
+                    <input formControlName="userPassword" type="text" class="form-control">
+                    <div *ngIf="userData.controls.userPassword.touched&&userData.controls.userPassword.errors!=null" class="alert alert-danger mt-3"> ay 7aga </div>
+    
+                </div>
+
+              <button [disabled]="userData.invalid" class="btn btn-info" *ngIf="createMode" type="submit">add user</button>
+              <button [disabled]="userData.invalid" class="btn btn-info" *ngIf="editMode" type="submit">edit user</button>
+
+  </form>
+  <div *ngIf="userCont.length>0" class="text-white my-3">
+      
+<!-- <div class="container py-5">
+        <div class="row">
+            <div *ngFor="let user of userCont" class="col-md-4 mb-4">
+                <div class="user-card">
+                     
+                        
+    
+                                <h2>{{user.userName}}</h2>
+                                                     
+                           
+                                <p>{{user.userAge}}</p>
+                                <span >{{user.userMail}}</span>
+                            </div>
+                       
+              
+            </div>
+        </div>
+       
+    </div> -->
+  <table class="table text-white my-5">
+      <thead>
+          <tr>
+              <th>user name</th>
+              <th>user age</th>
+              <th>user mail</th>
+              <th>user password</th>
+              <th></th>
+              <th></th>
+
+          </tr>
+      </thead>
+      <tbody>
+          
+          <tr *ngFor="let user of userCont; let i = index">
+              <td>{{user.userName}}</td>
+              <td>{{user.userAge}}</td>
+              <td>{{user.userMail}}</td>
+              <td>{{user.userPassword}}</td>
+
+              <td><button (click)="editUser(i,user)" class="btn btn-info">edit</button></td>
+              <td><button (click)="deleteUser(i)" class="btn btn-danger">delete</button></td>
+
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div *ngIf="userCont.length==0" class="text-white my-3 text-center">
+    <img src="../../assets/images/no-data.jpg">
+</div>
+
+</div> 
+
+
+<div class="container py-5">
+    <h1 class="text-center my-4 text-white">Movies Api</h1>
+    <input [(ngModel)]="searchText" class="form-control mb-4">
+    <div class="row">
+        <div *ngFor="let movie of pageOfItems|search:searchText" class="col-md-6 mb-4">
+            <div class="movie-card">
+                 <div class="row">
+                     <div class="col-md-6">
+                            <img class="img-fluid" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}">
+                        </div>
+                     <div class="col-md-6">
+                        <div class="movie-info text-white py-5 px-2">
+
+                            <h2>{{movie.title}}</h2>
+                            <i *ngFor="let star of movie.stars_avg" class="fa fa-star"></i> 
+                                                 
+                       
+                            <p>{{movie.overview|seemore:100}}</p>
+                            <span class="aver">{{movie.vote_average}}</span>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+        
+        <jw-pagination [pageSize]="6" [items]="movies"  (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+</div>
