@@ -18,7 +18,7 @@ export class MoviesService {
     {name:"mai",age:38,salary:8888,dateOfBirth:'2/3/1994',gender:'female'},
   ]
 
-  constructor(private _HttpClient:HttpClient) { }
+  constructor(public _HttpClient:HttpClient) { }
   getPosts():Observable<any>
   {
     return   this._HttpClient.get("https://jsonplaceholder.typicode.com/posts")
